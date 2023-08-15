@@ -1,17 +1,16 @@
-const express = require('express')
+const express = require('express');
+const debug = require('debug')('app'); // Add a namespace for debugging
+const path = require('path');
+
 const app = express();
-const debug = require('debug')("app");
-const morgan = require('morgan');
-const port = 3000;
+const port = 4500;
 
-app.use(morgan('combined'));
-app.get("/", (req, res) => {
-   
-    res.send("Hello Phakaphol");
+app.use(express.static(path.join(__dirname, 'public')));
 
-})
+app.get('/', (req, res) => {
+    res.send('Hello Phakaphol');
+});
 
-app.listen(port, () =>{
-
-    debug("จุ๊กกรู้วว" + chalk.red(port));
-})
+app.listen(port, () => {
+    debug(`Server is running on port ${port}`);
+});
